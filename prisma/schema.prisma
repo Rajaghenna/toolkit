@@ -94,8 +94,6 @@ model TwoFactorConfirmation{
   @@unique([userId])
 }
 
-
-
 model Listing{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String

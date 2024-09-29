@@ -3,6 +3,7 @@ import authConfig from "./authConfig";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "./lib/db";
 import { getUserById } from "./data/user";
+import { getTwoFactorConfirmationByUserId } from "./data/twoFactorConfirmation";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
@@ -40,6 +41,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return false;
       }
       //TODO:add 2FA HERE
+      if (existingUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id)
+        //if dnt have confirmation token we are not allowed to access
+        if(!twoFactorConfirmation)return false
+        //delete 2 factor conformation for next signin
+        await db.twoFactorConfirmation.delete({
+          where:{id:twoFactorConfirmation.id}
+        })
+      }
       //bydefault let login
       return true;
     },
