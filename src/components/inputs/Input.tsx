@@ -12,6 +12,7 @@ interface InputProps {
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
+  suffix?:React.ReactNode
 }
 
 const Input: React.FC<InputProps> = ({
@@ -29,6 +30,7 @@ const Input: React.FC<InputProps> = ({
       className="
     w-full 
     relative
+
     "
     >
       {formatPrice && (

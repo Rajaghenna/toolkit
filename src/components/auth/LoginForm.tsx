@@ -21,6 +21,8 @@ import { login } from "@/actionserver/login";
 import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { MailIcon } from "lucide-react";
+import { PasswordInput } from "../ui/password-input";
 
 const LoginForm = () => {
   //this is for 2fa
@@ -110,6 +112,7 @@ const LoginForm = () => {
                           disabled={isPending}
                           placeholder="johndoe@gmail.com"
                           type="email"
+                          suffix={<MailIcon />}
                         />
                       </FormControl>
                       <FormMessage />
@@ -123,11 +126,10 @@ const LoginForm = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input
+                        <PasswordInput
                           {...field}
-                          disabled={isPending}
                           placeholder="******"
-                          type="password"
+                          disabled={isPending}
                         />
                       </FormControl>
                       <Button

@@ -3,29 +3,29 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { Dialog } from "@/components/ui/dialog";
 import { DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
-interface LoginButtonProps {
+interface RegisterButtonProps {
   children: React.ReactNode;
   mode?: "modal" | "redirect";
   asChild?: boolean;
 }
 
-const LoginButton = ({
+const RegisterButton = ({
   children,
   mode = "redirect",
   asChild,
-}: LoginButtonProps) => {
+}: RegisterButtonProps) => {
   const router = useRouter();
   const onClick = () => {
-    router.push("/signin");
+    router.push("/register");
   };
   if (mode === "modal") {
     return (
       <Dialog>
         <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
-        <DialogContent className="p-0 w-auto border-none bg-transparent">
-          <LoginForm />
+        <DialogContent className="p-0 w-auto bg-transparent border-none">
+          <RegisterForm />
         </DialogContent>
       </Dialog>
     );
@@ -37,4 +37,4 @@ const LoginButton = ({
   );
 };
 
-export default LoginButton;
+export default RegisterButton;

@@ -19,6 +19,10 @@ import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
 import { register } from "@/actionserver/register";
 import { useTransition } from "react";
+import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
+import { MailIcon } from "lucide-react";
+import { MdPassword } from "react-icons/md";
+import { PasswordInput } from "../ui/password-input";
 
 const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -63,6 +67,7 @@ const RegisterForm = () => {
                       {...field}
                       disabled={isPending}
                       placeholder="johndoe"
+                      suffix={<MdOutlineDriveFileRenameOutline />}
                     />
                   </FormControl>
                   <FormMessage />
@@ -81,6 +86,7 @@ const RegisterForm = () => {
                       disabled={isPending}
                       placeholder="johndoe@gmail.com"
                       type="email"
+                      suffix={<MailIcon />}
                     />
                   </FormControl>
                   <FormMessage />
@@ -95,11 +101,11 @@ const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
+                    <PasswordInput
                       {...field}
-                      disabled={isPending}
+                      // disabled={isPending}
                       placeholder="******"
-                      type="password"
+                      disabled={isPending}
                     />
                   </FormControl>
                   <FormMessage />

@@ -31,6 +31,12 @@ import {
 } from "@/components/ui/select";
 import { UserRole } from "@prisma/client";
 import { Switch } from "@/components/ui/switch";
+import { FaUserEdit } from "react-icons/fa";
+import { MailIcon } from "lucide-react";
+import { PasswordInput } from "@/components/ui/password-input";
+import { FaUserMd } from "react-icons/fa";
+
+
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -89,6 +95,7 @@ const SettingsPage = () => {
                           {...field}
                           placeholder="johndoe"
                           disabled={isPending}
+                          suffix={<FaUserEdit />}
                         />
                       </FormControl>
                       <FormMessage />
@@ -110,6 +117,7 @@ const SettingsPage = () => {
                               placeholder="johndoe@mail.com"
                               disabled={isPending}
                               type="email"
+                              suffix={<MailIcon />}
                             />
                           </FormControl>
                           <FormMessage />
@@ -124,11 +132,10 @@ const SettingsPage = () => {
                         <FormItem>
                           <FormLabel>Old-Password</FormLabel>
                           <FormControl>
-                            <Input
+                            <PasswordInput
                               {...field}
                               placeholder="******"
                               disabled={isPending}
-                              type="password"
                             />
                           </FormControl>
                           <FormMessage />
@@ -143,11 +150,10 @@ const SettingsPage = () => {
                         <FormItem>
                           <FormLabel>New-Password</FormLabel>
                           <FormControl>
-                            <Input
+                            <PasswordInput
                               {...field}
                               placeholder="******"
                               disabled={isPending}
-                              type="password"
                             />
                           </FormControl>
                           <FormMessage />
@@ -157,8 +163,8 @@ const SettingsPage = () => {
                   </>
                 )}
                 {/* role */}
-                {user?.role==="ADMIN" && (
-                   <>
+                {user?.role === "ADMIN" && (
+                  <>
                     <FormField
                       control={form.control}
                       name="role"
