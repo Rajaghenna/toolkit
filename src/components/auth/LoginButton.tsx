@@ -20,7 +20,7 @@ const LoginButton = ({
   const onClick = () => {
     router.push("/signin");
   };
-  if (mode === "modal") {
+  if (mode === "redirect") {
     return (
       <Dialog>
         <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
