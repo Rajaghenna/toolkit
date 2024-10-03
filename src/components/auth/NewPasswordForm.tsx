@@ -19,11 +19,11 @@ import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
 import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
-import { newPassword } from "@/actions/newPassword";
+import { newPassword } from "@/actionserver/newPassword";
 
 const NewPasswordForm = () => {
-  const searchParams= useSearchParams()
-  const token = searchParams.get("token")
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -40,7 +40,7 @@ const NewPasswordForm = () => {
 
     startTransition(() => {
       //with values we are also getting token from newPassword server action
-      newPassword(values,token).then((data) => {
+      newPassword(values, token).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });

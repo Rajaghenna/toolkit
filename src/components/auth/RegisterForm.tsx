@@ -17,7 +17,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
-import { register} from "@/actions/register";
+import { register } from "@/actionserver/register";
 import { useTransition } from "react";
 
 const RegisterForm = () => {
@@ -27,7 +27,7 @@ const RegisterForm = () => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      name:"",
+      name: "",
       email: "",
       password: "",
     },
@@ -108,7 +108,7 @@ const RegisterForm = () => {
             />
           </div>
           <FormError message={error} />
-          <FormSuccess message={success}/>
+          <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
             Create Account
           </Button>

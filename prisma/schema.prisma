@@ -33,8 +33,6 @@ model User{
   reservations Reservation[]
   orders Order[]
   sessions      Session[]
-    // Optional for WebAuthn support
-  Authenticator Authenticator[]
 }
 
 
@@ -179,20 +177,5 @@ model Session {
   updatedAt DateTime @updatedAt
 }
 
-// Optional for WebAuthn support
-model Authenticator {
-  credentialID         String  @id @map("_id")
-  userId               String  @db.ObjectId
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  @@unique([userId, credentialID])
-}
 // as we are using prisma n its does not worls on edge tht y session use on database edge
 //so we dnt requires session as we just work with jwt

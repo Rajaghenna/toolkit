@@ -17,7 +17,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
-import { reset } from "@/actions/reset";
+import { reset } from "@/actionserver/reset";
 import { useTransition } from "react";
 
 const ResetForm = () => {

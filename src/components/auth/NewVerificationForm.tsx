@@ -2,12 +2,11 @@
 import React, { useCallback, useState } from "react";
 import CardWrapper from "./CardWrapper";
 import { useSearchParams } from "next/navigation";
-import { newVerification } from "@/actions/newVerification";
+import { newVerification } from "@/actionserver/newVerification";
 import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
 import { Button } from "../ui/button";
 import { SiSimplelogin } from "react-icons/si";
-
 
 const NewVerificationForm = () => {
   const [error, setError] = useState<string | undefined>();
@@ -36,10 +35,12 @@ const NewVerificationForm = () => {
       backButtonHref="/signin"
     >
       <div className="flex flex-col items-center justify-center w-full">
-          <SiSimplelogin className="h-20 w-20 text-orange-500"/>
+        <SiSimplelogin className="h-20 w-20 text-orange-500" />
         <FormError message={error} />
         <FormSuccess message={success} />
-      <Button className="mt-2 hover:bg-orange-500" onClick={onSubmit}>Confirm</Button>
+        <Button className="mt-2 hover:bg-orange-500" onClick={onSubmit}>
+          Confirm
+        </Button>
       </div>
     </CardWrapper>
   );

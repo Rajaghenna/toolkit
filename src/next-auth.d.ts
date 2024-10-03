@@ -2,7 +2,9 @@ import { type DefaultSession } from "next-auth";
 
 export type ExtendedUser = DefaultSession["user"] & {
   role: "ADMIN" | "USER";
-  id: string|undefined;
+  id: string | undefined;
+  isTwoFactorEnabled: boolean;
+  isOAuth: boolean;
 };
 
 declare module "next-auth" {
@@ -10,7 +12,9 @@ declare module "next-auth" {
     user: ExtendedUser &
       User & {
         role: "ADMIN" | "USER";
-        id: string|undefined;
+        id: string | undefined;
+        isTwoFactorEnabled: boolean;
+        isOAuth: boolean;
       };
   }
 }

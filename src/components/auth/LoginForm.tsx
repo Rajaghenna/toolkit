@@ -17,7 +17,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
-import { login } from "@/actions/login";
+import { login } from "@/actionserver/login";
 import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
