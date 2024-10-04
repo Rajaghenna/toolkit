@@ -9,21 +9,20 @@ import React, { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import MenuItem from "./MenuItem";
 import AvatarImg from "../main/Avatar";
-import {useCurrentUser} from "@/hooks/useCurrentUser";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 //here in client we have to usehook
-
 
 // interface UserMenuProps {
 //   currentUser?: SafeUser | null;
 // }
 
-const UserMenu= () => {
+const UserMenu = () => {
   const router = useRouter();
   // const registerModal = useRegisterModal();
   // const loginModal = useLoginModal();
   const rentModal = useRentModal();
-  const currentUser=useCurrentUser()
+  const currentUser = useCurrentUser();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -137,16 +136,20 @@ const UserMenu= () => {
                   label="My Properties"
                 />
                 <MenuItem
+                  onClick={() => router.push("/users")}
+                  label="MyChat"
+                />
+                <MenuItem
                   onClick={() => router.push("/dashboard")}
                   label="My Dashboard"
                 />
                 <MenuItem onClick={rentModal.onOpen} label="Add Property" />
                 <hr className="border-teal-500" />
-                <MenuItem onClick={()=>signOut()} label="LogOut" />
+                <MenuItem onClick={() => signOut()} label="LogOut" />
               </>
             ) : (
               <>
-              <MenuItem
+                <MenuItem
                   onClick={() => router.push("/signin")}
                   label="SignIn"
                 />

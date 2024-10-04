@@ -38,7 +38,8 @@ const NewVerificationForm = () => {
         <SiSimplelogin className="h-20 w-20 text-orange-500" />
         <FormError message={error} />
         <FormSuccess message={success} />
-        <Button className="mt-2 hover:bg-orange-500" onClick={onSubmit}>
+        <Button className="mt-2 hover:bg-orange-500" onClick={onSubmit}
+        >
           Confirm
         </Button>
       </div>

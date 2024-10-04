@@ -132,6 +132,10 @@ const DropDown = () => {
                     label="My Properties"
                   />
                   <MenuItem
+                    onClick={() => router.push("/users")}
+                    label="MyChat"
+                  />
+                  <MenuItem
                     onClick={() => router.push("/dashboard")}
                     label="My Dashboard"
                   />

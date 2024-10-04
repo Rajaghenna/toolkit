@@ -34,7 +34,6 @@ import { Switch } from "@/components/ui/switch";
 import { FaUserEdit } from "react-icons/fa";
 import { MailIcon } from "lucide-react";
 import { PasswordInput } from "@/components/ui/password-input";
-import { FaUserMd } from "react-icons/fa";
 
 
 

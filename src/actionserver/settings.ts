@@ -27,7 +27,6 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
   }
   //if user wants to update email with its another email that registered with us with some 
   //other provider we will not allow them to update r link accounts with already existing email
-  
   if (values.email && values.email !== user.email) {
     const exisitingUser = await getUserByEmail(values.email);
 
