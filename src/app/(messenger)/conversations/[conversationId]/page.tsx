@@ -3,6 +3,8 @@ import getMessages from '@/actionserver/mesActions/getMessages';
 import EmptyState from '@/components/main/EmptyState';
 import React from 'react'
 import Header from './_components/Header';
+import Body from './_components/Body';
+import Form from './_components/Form';
 
 
 interface IParams{
@@ -30,6 +32,8 @@ const ConversationId =async ({params}:{params:IParams}) => {
     <div className='lg:pl-80 h-full'>
       <div className='h-full flex flex-col'>
         <Header conversation={conversation} />
+        <Body />
+        <Form/>
       </div>
     </div>
   )
