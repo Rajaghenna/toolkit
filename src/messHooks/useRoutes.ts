@@ -11,26 +11,29 @@ const useRoutes=()=>{
   const pathname=usePathname()
   const {conversationId}=useConversation()
 
-  const routes = useMemo(()=>[
-    {
-      label:"Chat",
-      href:"/conversations",
-      icon: HiChat,
-      active: pathname === "/conversations"|| !!conversationId
-    },
-    {
-      label:"Users",
-      href:"/users",
-      icon:HiUsers,
-      active:  pathname === "/users"
-    },
-    {
-      label:"LogOut",
-      href:"#",
-      icon: LogOut,
-      onClick:()=>signOut()
-    }
-  ],[conversationId, pathname])
+  const routes = useMemo(
+    () => [
+      {
+        label: "Chat",
+        href: "/conversations",
+        icon: HiChat,
+        active: pathname === "/conversations" || !!conversationId,
+      },
+      {
+        label: "Users",
+        href: "/users",
+        icon: HiUsers,
+        active: pathname === "/users",
+      },
+      {
+        label: "LogOut",
+        href: "#",
+        icon: LogOut,
+        onClick: () => signOut(),
+      },
+    ],
+    [conversationId, pathname]
+  );
   return routes
 }
 export default useRoutes

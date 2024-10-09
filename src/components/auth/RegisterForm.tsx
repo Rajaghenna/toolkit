@@ -21,7 +21,6 @@ import { register } from "@/actionserver/register";
 import { useTransition } from "react";
 import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import { MailIcon } from "lucide-react";
-import { MdPassword } from "react-icons/md";
 import { PasswordInput } from "../ui/password-input";
 
 const RegisterForm = () => {
@@ -67,7 +66,9 @@ const RegisterForm = () => {
                       {...field}
                       disabled={isPending}
                       placeholder="johndoe"
-                      suffix={<MdOutlineDriveFileRenameOutline />}
+                      suffix={
+                        <MdOutlineDriveFileRenameOutline className="-ml-10" />
+                      }
                     />
                   </FormControl>
                   <FormMessage />
@@ -86,7 +87,7 @@ const RegisterForm = () => {
                       disabled={isPending}
                       placeholder="johndoe@gmail.com"
                       type="email"
-                      suffix={<MailIcon />}
+                      suffix={<MailIcon className="-ml-10" />}
                     />
                   </FormControl>
                   <FormMessage />

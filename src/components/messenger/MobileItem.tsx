@@ -11,6 +11,7 @@ interface MobileItemProps {
 }
 
 const MobileItem: React.FC<MobileItemProps> = ({
+  href,
   icon: Icon,
   active,
   onClick,
@@ -22,8 +23,8 @@ const MobileItem: React.FC<MobileItemProps> = ({
   }
   return (
     <Link
-      href="href"
-      onClick={onClick}
+      href={href}
+      onClick={handleClick}
       className={clsx(`
       group
       flex

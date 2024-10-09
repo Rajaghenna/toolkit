@@ -112,7 +112,7 @@ const LoginForm = () => {
                           disabled={isPending}
                           placeholder="johndoe@gmail.com"
                           type="email"
-                          suffix={<MailIcon />}
+                          suffix={<MailIcon className="-ml-10"/>}
                         />
                       </FormControl>
                       <FormMessage />

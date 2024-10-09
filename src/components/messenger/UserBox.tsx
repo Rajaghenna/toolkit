@@ -43,12 +43,12 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
     cursor pointer
     "
     >
-      <AvatarImg user={data} />
+      <AvatarImg user={data}/>
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
           <div
             className="
-          flex 
+          flex
           justify-between
           items-center
           mb-1

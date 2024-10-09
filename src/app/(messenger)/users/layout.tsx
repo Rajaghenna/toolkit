@@ -8,6 +8,7 @@ export default async function UsersLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // as this is server component we can call users directly without api call
   const users =await getUsers();
   return (
     <AuthContext>

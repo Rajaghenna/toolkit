@@ -28,7 +28,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div
       className="
-    w-full 
+    w-5/6 
     relative
 
     "
@@ -52,7 +52,7 @@ const Input: React.FC<InputProps> = ({
         type={type}
         className={`
          peer
-         w-full
+         w-5/6
          p-4
          pt-6
          font-light

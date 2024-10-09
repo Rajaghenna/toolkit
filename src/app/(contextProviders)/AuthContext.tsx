@@ -12,3 +12,5 @@ export default function AuthContext({
     {children}
   </SessionProvider>
 }
+
+//note authContext is always used as tsx extension

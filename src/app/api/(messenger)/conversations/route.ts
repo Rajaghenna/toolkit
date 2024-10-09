@@ -9,11 +9,17 @@ export async function POST(request: Request) {
     const body = await request.json();
     //here private and group chat also inti
     //group needs members ,groupname, membername,name
-    const { userId, isGroup, members, name } = body;
+    const {
+       userId, 
+      isGroup,
+       members,
+        name 
+      } = body;
 
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse("UnAuthorised", { status: 401 });
     }
+    //no members or names
     if (isGroup && (!members || members.length < 2 || !name)) {
       return new NextResponse("Invalid data", { status: 400 });
     }

@@ -26,7 +26,9 @@ const DesktopItem: React.FC<DesktopItemProps> = ({
   return (
     <li onClick={handleClick}>
       <Link
-      className={clsx(`
+        href={href}
+        className={clsx(
+          `
         group
         flex
         gap-x-3
@@ -37,16 +39,14 @@ const DesktopItem: React.FC<DesktopItemProps> = ({
         font-semibold
         hover:text-gray-800
         hover:bg-gray-200`,
-        active && 'bg-gray-300 text-black'
-      )}
-      href={href}>
-      <Icon className="h-6 w-6 shrink-0"/>
-       <span className="sr-only">
-        {label}
-        </span>
+          active && "bg-gray-200 text-black"
+        )}
+      >
+        <Icon className="h-6 w-6 shrink-0" />
+        <span className="sr-only">{label}</span>
       </Link>
     </li>
-  )
+  );
 };
 
 export default DesktopItem;

@@ -74,7 +74,7 @@ const SettingsPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center pt-[150px]">
-      <Card className="w-[600px]">
+      <Card className="w-[550px]">
         <CardHeader>
           <p className="text-2xl font-semibold text-center">🎇Settings</p>
         </CardHeader>
@@ -94,7 +94,7 @@ const SettingsPage = () => {
                           {...field}
                           placeholder="johndoe"
                           disabled={isPending}
-                          suffix={<FaUserEdit />}
+                          suffix={<FaUserEdit className="-ml-10"/>}
                         />
                       </FormControl>
                       <FormMessage />
@@ -116,7 +116,7 @@ const SettingsPage = () => {
                               placeholder="johndoe@mail.com"
                               disabled={isPending}
                               type="email"
-                              suffix={<MailIcon />}
+                              suffix={<MailIcon className="-ml-10"/>}
                             />
                           </FormControl>
                           <FormMessage />
