@@ -1,14 +1,19 @@
 import { UserRole } from "@prisma/client";
 import * as z from "zod";
 
+// Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character
+const passwordValidation = new RegExp(
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+);
+
 export const SettingsSchema = z
   .object({
     name: z.optional(z.string()),
     isTwoFactorEnabled: z.optional(z.boolean()),
     role: z.enum([UserRole.ADMIN, UserRole.USER]),
     email: z.optional(z.string().email()),
-    password: z.optional(z.string().min(6)),
-    newPassword: z.optional(z.string().min(6)),
+    password: z.optional(z.string().min(1)),
+    newPassword: z.optional(z.string().min(8)),
   })
   .refine(
     (data) => {
@@ -36,9 +41,16 @@ export const SettingsSchema = z
   );
 
 export const NewPasswordSchema = z.object({
-  password: z.string().min(6, {
-    message: "Minimum 6 Characters Required!",
-  }),
+  password: z
+    .string()
+    .min(1, { message: "Must have at least 1 character" })
+    .regex(passwordValidation, {
+      message:
+        "Your password is not valid,Required lowerCase UpperCase Number SpecialCharcater each",
+    }),
+  // password: z.string().min(8, {
+  //   message: "Minimum 6 Characters Required!",
+  // }),
 });
 
 export const ResetSchema = z.object({
@@ -61,10 +73,18 @@ export const RegisterSchema = z.object({
   email: z.string().email({
     message: "Email Required!",
   }),
-  password: z.string().min(6, {
-    message: "Minimum 6 Characters Required!",
-  }),
   name: z.string().min(2, {
     message: "Name Required!",
   }),
+  password: z
+    .string()
+    .min(1, { message: "Must have at least 1 character" })
+    .regex(passwordValidation, {
+      message:
+        "Your password is not valid,Required lowerCase UpperCase Number SpecialCharcater each",
+    }),
+
+  // password: z.string().min(8, {
+  //   message: "Minimum 6 Characters Required!",
+  // }),
 });

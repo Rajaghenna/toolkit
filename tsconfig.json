@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/(images)/photo/page.jsx", "src/components/messenger/InputImage.jsx", "src/app/(messenger)/conversations/[conversationId]/_components/Form.tsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,0 +1,88 @@
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
+  margin-top: 150px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center;
+  width: 600px;
+  height: 400px;
+  background-color: rgb(241, 240, 240);
+  border-radius: 10px;
+}
+/* .submitBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+} */
+.secondHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  font-size: 40px;
+}
+
+.icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+/* THIS STYLES ARE BEST FIR FOR PROFILE PICS */
+
+/* .imgDpBefore {
+    height: 200px;
+    width: 200px;
+    margin-left: 35px;
+    cursor: pointer;
+}
+
+.imgDpAfter {
+
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    cursor: pointer;
+} */
+
+.imageLabel {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  margin-bottom: 60px;
+   
+}
+
+.uploadImg {
+  display: block;
+  max-width: full;
+  max-height: full;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+.picEditor {
+  border: 12px;
+  border-color: blue;
+  border-bottom: 100;
+  backdrop-filter: 12px;
+  margin-top: 60px;
+}

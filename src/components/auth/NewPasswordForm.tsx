@@ -20,6 +20,7 @@ import FormSuccess from "../main/FormSuccess";
 import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { newPassword } from "@/actionserver/newPassword";
+import { PasswordInput } from "../ui/password-input";
 
 const NewPasswordForm = () => {
   const searchParams = useSearchParams();
@@ -62,11 +63,10 @@ const NewPasswordForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
+                    <PasswordInput
                       {...field}
                       disabled={isPending}
-                      placeholder="******"
-                      type="password"
+                      // placeholder="******"
                     />
                   </FormControl>
                   <FormMessage />
