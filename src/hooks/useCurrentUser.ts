@@ -1,5 +1,5 @@
 "use client"
-// to avaoid getting data.user.name from useSession
+// to avoid getting data.user.name from useSession
 //directly using a useCurrentUser hook
 
 import { useSession } from "next-auth/react";

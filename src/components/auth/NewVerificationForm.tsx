@@ -1,7 +1,7 @@
 "use client";
 import React, { useCallback, useState } from "react";
 import CardWrapper from "./CardWrapper";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { newVerification } from "@/actionserver/newVerification";
 import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { SiSimplelogin } from "react-icons/si";
 
 const NewVerificationForm = () => {
+  const router=useRouter()
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const searchParams = useSearchParams();
@@ -22,12 +23,13 @@ const NewVerificationForm = () => {
     newVerification(token)
       .then((data) => {
         setSuccess(data.success);
+        router.push("/signin")
         setError(data.error);
       })
       .catch(() => {
         setError("Something Went Wrong");
       });
-  }, [token]);
+  }, [token,router]);
   return (
     <CardWrapper
       headerLabel="Confirm your Verification"

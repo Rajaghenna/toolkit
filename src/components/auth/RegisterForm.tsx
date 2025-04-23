@@ -65,7 +65,7 @@ const RegisterForm = () => {
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="johndoe"
+                      placeholder="john-doe"
                       suffix={
                         <MdOutlineDriveFileRenameOutline className="-ml-10" />
                       }

@@ -11,7 +11,7 @@ export const newVerification = async (token: string) => {
     //means we cannot verify your account
     return { error: "Token Does Not Exists" };
   }
-  //check if token expires means user cliked link in his email after token validity expiry time
+  //check if token expires means user clicked link in his email after token validity expiry time
   const hasExpired = new Date(existingToken.expires) < new Date();
   if (hasExpired) {
     return { error: "Token Expired!!" };

@@ -1,12 +1,11 @@
 "use client"
+import logOut from '@/actionserver/logout';
+import React from 'react'
 
 interface SignOutProps{
   children?:React.ReactNode
 }
 
-
-import logOut from '@/actionserver/logout';
-import React from 'react'
 
 const SignOut = ({
   children

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { settings } from "@/actionserver/settings";
 import { useTransition } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { SettingsSchema } from "@/schemas";
 import {
   Form,
@@ -35,8 +35,6 @@ import { FaUserEdit } from "react-icons/fa";
 import { MailIcon } from "lucide-react";
 import { PasswordInput } from "@/components/ui/password-input";
 
-
-
 const SettingsPage = () => {
   const user = useCurrentUser();
   const [error, setError] = useState<string | undefined>();
@@ -49,7 +47,7 @@ const SettingsPage = () => {
     defaultValues: {
       name: user?.name || undefined,
       email: user?.email || undefined,
-      password:undefined,
+      password: undefined,
       newPassword: undefined,
       role: user?.role || undefined,
       isTwoFactorEnabled: user?.isTwoFactorEnabled || undefined,
@@ -94,7 +92,7 @@ const SettingsPage = () => {
                           {...field}
                           placeholder="johndoe"
                           disabled={isPending}
-                          suffix={<FaUserEdit className="-ml-10"/>}
+                          suffix={<FaUserEdit className="-ml-10" />}
                         />
                       </FormControl>
                       <FormMessage />
@@ -116,7 +114,7 @@ const SettingsPage = () => {
                               placeholder="johndoe@mail.com"
                               disabled={isPending}
                               type="email"
-                              suffix={<MailIcon className="-ml-10"/>}
+                              suffix={<MailIcon className="-ml-10" />}
                             />
                           </FormControl>
                           <FormMessage />
