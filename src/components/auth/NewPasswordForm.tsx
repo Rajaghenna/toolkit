@@ -13,14 +13,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { NewPasswordSchema } from "@/schemas";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
 import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { newPassword } from "@/actionserver/newPassword";
 import { PasswordInput } from "../ui/password-input";
+import { Button } from "../ui/button";
 
 const NewPasswordForm = () => {
   const searchParams = useSearchParams();

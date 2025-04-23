@@ -13,7 +13,14 @@ export const SettingsSchema = z
     role: z.enum([UserRole.ADMIN, UserRole.USER]),
     email: z.optional(z.string().email()),
     password: z.optional(z.string().min(1)),
-    newPassword: z.optional(z.string().min(8)),
+    // newPassword: z.optional(z.string().min(8)),
+    newPassword: z
+      .string()
+      .min(8, { message: "Must have at least 8 character eg:= Capital3*" })
+      .regex(passwordValidation, {
+        message:
+          "Required lowerCase, UpperCase, Number, Special-Character with 8 characters",
+      }),
   })
   .refine(
     (data) => {
@@ -46,11 +53,8 @@ export const NewPasswordSchema = z.object({
     .min(1, { message: "Must have at least 1 character" })
     .regex(passwordValidation, {
       message:
-        "Your password is not valid,Required lowerCase UpperCase Number SpecialCharcater each",
+        "Your password is not valid,Required lowerCase UpperCase Number Special-Character Required",
     }),
-  // password: z.string().min(8, {
-  //   message: "Minimum 6 Characters Required!",
-  // }),
 });
 
 export const ResetSchema = z.object({
@@ -78,13 +82,9 @@ export const RegisterSchema = z.object({
   }),
   password: z
     .string()
-    .min(1, { message: "Must have at least 1 character" })
+    .min(8, { message: "Must have at least 8 character eg:= Capital3*" })
     .regex(passwordValidation, {
       message:
-        "Your password is not valid,Required lowerCase UpperCase Number SpecialCharcater each",
+        "Required lowerCase, UpperCase, Number, Special-Character with 8 characters",
     }),
-
-  // password: z.string().min(8, {
-  //   message: "Minimum 6 Characters Required!",
-  // }),
 });

@@ -4,7 +4,7 @@
  */
 export const publicRoutes = ["/", "/newVerification"];
 /**
- * an array of routes ysed for authentication
+ * an array of routes used for authentication
  * these routes will redirect logged in users to /settings
  * @type{string[]}
  */
@@ -19,7 +19,7 @@ export const authRoutes = [
 /**
  * the prefix for API Authentication routes
  * Routes that starts with this prefix are always available for to working of website API ROUTES PROPERLY
- * so this should always be free and open for everytime its used
+ * so this should always be free and open for every time its used
  * @type{string}
  */
 

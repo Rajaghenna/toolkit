@@ -3,8 +3,6 @@
 import { getUserByEmail } from "@/data/user";
 import { db } from "@/lib/db";
 import { getVerificationTokenByToken } from "@/lib/verification.token";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { redirect } from "next/navigation";
 
 export const newVerification = async (token: string) => {
   const existingToken = await getVerificationTokenByToken(token);
@@ -20,7 +18,7 @@ export const newVerification = async (token: string) => {
   }
   const existingUser = await getUserByEmail(existingToken.email);
   if (!existingUser) {
-    return { error: "Email doesnot Exsits" };
+    return { error: "Email does not Exits" };
   }
   await db.user.update({
     where: { id: existingUser.id },

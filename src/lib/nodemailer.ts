@@ -1,6 +1,5 @@
 "use server";
 import nodemailer from "nodemailer";
-import Two2FACode from "@/components/email/Two2FACode";
 
 const domain = process.env.NEXT_PUBLIC_APP_URL;
 
@@ -10,10 +9,14 @@ const SMTP_SERVER_PASSWORD = process.env.EMAIL_SERVER_PASSWORD;
 const SITE_MAIL_RECIEVER = process.env.EMAIL_MAIL_RECIEVER;
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: "smtp.hostinger.com",
   host: SMTP_SERVER_HOST,
-  port: 587,
+  port: 465,
   secure: true,
+  requireTLS: true,
+  tls: {
+    ciphers: "SSLv3",
+  },
   auth: {
     user: SMTP_SERVER_USERNAME,
     pass: SMTP_SERVER_PASSWORD,
@@ -96,4 +99,3 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   console.log("Mail sent to", email);
   return veriEmail;
 };
-

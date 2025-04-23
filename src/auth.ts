@@ -12,8 +12,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: "/error",
   },
   events: {
-    //Events does not returns resposnse so in events users logged in with its OAuth accounts
-    //and emailverified field is automatically updated with current datetime
+    //Events does not returns response so in events users logged in with its OAuth accounts
+    //and email-verified field is automatically updated with current datetime
     async linkAccount({ user }) {
       await db.user.update({
         where: { id: user.id },
@@ -36,7 +36,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (!userExsits) {
         return "/register";
       }
-      const existingUser = await getUserById(user.id!);
+      const existingUser = await getUserById(user.id as string);
       //user is not allowed to sign in with verified email
       if (!existingUser?.emailVerified) {
         return false;
@@ -53,14 +53,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           where: { id: twoFactorConfirmation.id },
         });
       }
-      //bydefault let login
+      //by default let login
       return true;
     },
     async session({ token, session }) {
       session.user.id = token.id;
       //check session token role is there now fetch role to show on our server component frontend display ui
       // console.log({sessionToken:token})
-      //we can fetch fields or custome fields defined in jwt can be displayed in
+      //we can fetch fields or custom fields defined in jwt can be displayed in
       //server component session frontend display ui
       //here we fetch sub and attach with userid as id
       if (token.sub && session.user) {
@@ -77,7 +77,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (session?.user) {
           session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
         }
-        //update name and email here also aswe updated in jwt but its not saved in db
+        //update name and email here also as we updated in jwt but its not saved in db
         //it will be shown updated in client browser
         //to store updated name or change names have to do following
         if (session.user) {
@@ -103,11 +103,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       //if user not loggedIn return token means do nothing
       if (!existingUser) return token;
       //get existing Account as we dnt have OAuth fb git goo accounts
-      //so have to only update credentials which only we ahave in our database
+      //so have to only update credentials which only we have in our database
       const existingAccount=await getAccountByUserId(
         existingUser.id
       )
-      token.isOAuth =!!existingAccount //note changeds string to boolean by adding !! got it
+      token.isOAuth =!!existingAccount //note changed string to boolean by adding !! got it
 
       //updating name of user else will have to update manually
       token.name = existingUser.name;

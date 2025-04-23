@@ -19,12 +19,12 @@ export default {
           const { email, password } = validatedFields.data;
 
           const user = await getUserByEmail(email);
-          // here user wants login woithout password as oauth github,google that
+          // here user wants login without password as oauth github,google that
           //users are handled by 3 party
           if (!user || !user.password) return null;
           //user registered on our platform password will be compared to grant access his Profile
           const passwordsMatch = await bcrypt.compare(
-            //1st user entered password then matched with hashedpassword stored in db while creating user Account
+            //1st user entered password then matched with hashed password stored in db while creating user Account
             password,
             user.password
           );

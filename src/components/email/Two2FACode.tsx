@@ -7,7 +7,7 @@ const Two2FACode = () => {
     backButtonLabel='Back to Website'
     backButtonHref='/'
     >
-
+     2FA
     </CardWrapper>
   )
 }

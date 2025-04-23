@@ -27,7 +27,7 @@ import { PasswordInput } from "../ui/password-input";
 const LoginForm = () => {
   //this is for 2fa
   const [showTwoFactor, setShowTwoFactor] = useState(false);
-  //this is the error callbackl from browser bar
+  //this is the error callback url from browser bar
   const searchParams = useSearchParams();
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
