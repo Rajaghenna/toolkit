@@ -19,7 +19,7 @@ export const SettingsSchema = z
       .min(8, { message: "Must have at least 8 character eg:= Capital3*" })
       .regex(passwordValidation, {
         message:
-          "Required lowerCase, UpperCase, Number, Special-Character with 8 characters",
+          "Minimum 8 Characters Required(1.lowerCase, 1.UpperCase, 1.Number, 1.Special-Character) for eg:- John_123*#",
       }),
   })
   .refine(
@@ -50,10 +50,10 @@ export const SettingsSchema = z
 export const NewPasswordSchema = z.object({
   password: z
     .string()
-    .min(1, { message: "Must have at least 1 character" })
+    .min(8, { message: "Must have at least 1 character" })
     .regex(passwordValidation, {
       message:
-        "Your password is not valid,Required lowerCase UpperCase Number Special-Character Required",
+        "Minimum 8 Characters Required(1.lowerCase, 1.UpperCase, 1.Number, 1.Special-Character) for eg:- John_123*#",
     }),
 });
 
