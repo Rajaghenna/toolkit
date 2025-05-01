@@ -2,7 +2,7 @@
 import { signOut } from "@/auth"
 
 
-const logOut =async () => {
+const logOut = async () => {
   //some server stuff  before logging out
  await signOut()
 }

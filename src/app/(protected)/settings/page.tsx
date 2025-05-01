@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { settings } from "@/actionserver/settings";
 import { useTransition } from "react";
-import { signOut, useSession } from "next-auth/react";
+import {  useSession } from "next-auth/react";
 import { SettingsSchema } from "@/schemas";
 import {
   Form,
@@ -221,7 +221,7 @@ const SettingsPage = () => {
               </div>
               <FormError message={error} />
               <FormSuccess message={success} />
-              <Button disabled={isPending} type="submit">
+              <Button className="mr-4" disabled={isPending} type="submit">
                 Save
               </Button>
             </form>

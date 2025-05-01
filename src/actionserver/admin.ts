@@ -9,5 +9,4 @@ export const admin=async()=>{
     return {success:"Yes you are authorized"}
   }
   return {error:"You are not authorized"}
-
 }

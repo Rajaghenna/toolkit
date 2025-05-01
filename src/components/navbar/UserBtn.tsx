@@ -31,7 +31,7 @@ const UserBtn = () => {
           asChild
           variant={pathname === "/profile" ? "myColor" : "outline"}
         >
-          <Link href="/Profile">Profile</Link>
+          <Link href="/dashboard">Dashboard</Link>
         </Button>
         <Button
           asChild

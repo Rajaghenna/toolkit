@@ -1,5 +1,9 @@
-import React from 'react'
-import UserBtn from '../navbar/UserBtn';
+"use client"
+import React from "react";
+import UserBtn from "../navbar/UserBtn";
+import { Button } from "../ui/button";
+import logOut from "@/actionserver/logout";
+
 
 const PNavbar = () => {
   return (
@@ -9,10 +13,15 @@ const PNavbar = () => {
         py-4
       "
       >
-        <UserBtn/>
+        <UserBtn />
       </div>
+      <div className="float-right">
+        <Button onClick={()=>logOut()} >
+          SignOut
+        </Button>
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default PNavbar
+export default PNavbar;
