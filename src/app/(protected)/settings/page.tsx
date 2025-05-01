@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { settings } from "@/actionserver/settings";
 import { useTransition } from "react";
-import {  useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { SettingsSchema } from "@/schemas";
 import {
   Form,
@@ -33,9 +33,10 @@ import { UserRole } from "@prisma/client";
 import { Switch } from "@/components/ui/switch";
 import { FaUserEdit } from "react-icons/fa";
 import { MailIcon } from "lucide-react";
-import { PasswordInput } from "@/components/ui/password-input";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 const SettingsPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const user = useCurrentUser();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -90,9 +91,8 @@ const SettingsPage = () => {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="johndoe"
+                          placeholder="john-doe"
                           disabled={isPending}
-                          suffix={<FaUserEdit className="-ml-10" />}
                         />
                       </FormControl>
                       <FormMessage />
@@ -114,7 +114,6 @@ const SettingsPage = () => {
                               placeholder="johndoe@mail.com"
                               disabled={isPending}
                               type="email"
-                              suffix={<MailIcon className="-ml-10" />}
                             />
                           </FormControl>
                           <FormMessage />
@@ -129,11 +128,26 @@ const SettingsPage = () => {
                         <FormItem>
                           <FormLabel>Old-Password</FormLabel>
                           <FormControl>
-                            <PasswordInput
-                              {...field}
-                              placeholder="******"
-                              disabled={isPending}
-                            />
+                            <div className="flex items-center border rounded px-3 py-2">
+                              <Input
+                                {...field}
+                                placeholder="******"
+                                disabled={isPending}
+                                type={showPassword ? "text" : "password"}
+                                className="flex-grow outline-none"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="ml-2 text-gray-600"
+                              >
+                                {showPassword ? (
+                                  <RiEyeFill />
+                                ) : (
+                                  <RiEyeOffFill />
+                                )}
+                              </button>
+                            </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -147,11 +161,26 @@ const SettingsPage = () => {
                         <FormItem>
                           <FormLabel>New-Password</FormLabel>
                           <FormControl>
-                            <PasswordInput
-                              {...field}
-                              placeholder="******"
-                              disabled={isPending}
-                            />
+                            <div className="flex items-center border rounded px-3 py-2">
+                              <Input
+                                {...field}
+                                placeholder="******"
+                                disabled={isPending}
+                                type={showPassword ? "text" : "password"}
+                                className="flex-grow outline-none"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="ml-2 text-gray-600"
+                              >
+                                {showPassword ? (
+                                  <RiEyeFill />
+                                ) : (
+                                  <RiEyeOffFill />
+                                )}
+                              </button>
+                            </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>

@@ -18,10 +18,12 @@ import FormSuccess from "../main/FormSuccess";
 import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { newPassword } from "@/actionserver/newPassword";
-import { PasswordInput } from "../ui/password-input";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 const NewPasswordForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const [error, setError] = useState<string | undefined>("");
@@ -62,11 +64,22 @@ const NewPasswordForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <PasswordInput
-                      {...field}
-                      disabled={isPending}
-                      // placeholder="******"
-                    />
+                    <div className="flex items-center border rounded px-3 py-2">
+                      <Input
+                        {...field}
+                        placeholder="******"
+                        disabled={isPending}
+                        type={showPassword ? "text" : "password"}
+                        className="flex-grow outline-none"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="ml-2 text-gray-600"
+                      >
+                        {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
