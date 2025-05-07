@@ -1,8 +1,8 @@
 "use client";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { Button } from "../ui/button";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const UserBtn = () => {
   const pathname = usePathname();
@@ -38,6 +38,12 @@ const UserBtn = () => {
           variant={pathname === "/admin" ? "myColor" : "outline"}
         >
           <Link href="/admin">Admin</Link>
+        </Button>
+        <Button
+          asChild
+          variant={pathname === "/main" ? "myColor" : "outline"}
+        >
+          <Link href="/main">MainPage</Link>
         </Button>
       </div>
     </nav>

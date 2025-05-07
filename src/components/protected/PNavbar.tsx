@@ -1,8 +1,8 @@
 "use client"
 import React from "react";
-import UserBtn from "../navbar/UserBtn";
 import { Button } from "../ui/button";
 import logOut from "@/actionserver/logout";
+import UserBtn from "../main/navbar/UserBtn";
 
 
 const PNavbar = () => {

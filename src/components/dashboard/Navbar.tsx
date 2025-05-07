@@ -1,27 +1,39 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, User2Icon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  // DropdownMenuLabel,`
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DarkMode } from "../theme/DarkMode";
 import SidebarCollapseBtn from "./SidebarCollapseBtn";
-// import { useSidebar } from "../ui/sidebar";
-// import { Button } from "../ui/button";
+import { User } from "next-auth";
+import { AiOutlineMenu } from "react-icons/ai";
+import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
+import { SafeUser } from "@/app/types";
+interface NavbarProps {
+  currentUser?: SafeUser|User | null;
+}
 
-const Navbar = () => {
+const Navbar = ({ currentUser }: NavbarProps) => {
+  const router=useRouter()
   // const {toggleSidebar } = useSidebar();
+    const signUp = () => {
+      router.push("/register");
+    };
+    const signIn = () => {
+      router.push("/signin");
+    };
   return (
     <nav className="flex p-4 items-center justify-between">
       {/* left side */}
-      <SidebarCollapseBtn/>
+      <SidebarCollapseBtn />
       {/* <Button onClick={toggleSidebar} variant="outline">Custom Button</Button> */}
       {/* right side */}
       <div className="flex items-center gap-4">
@@ -29,49 +41,56 @@ const Navbar = () => {
         {/* theme menu */}
         <DarkMode />
         {/* user Menu */}
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Avatar>
-              <AvatarImage src="/images/placeholder.jpg" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent sideOffset={10}>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User className="h-[1.2rem] w-[1.2rem] mr-3" />
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="h-[1.2rem] w-[1.2rem] mr-3" />
-              Settings
-            </DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem className="text-destructive">
-              <LogOut className="h-[1.2rem] w-[1.2rem] mr-3" />
-              LogOut
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        {/* this is for disabled people menu */}
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant={"outline"} size={"icon"}>
-              <SquareMenu />
-              <span className="sr-only">Open Menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu> */}
+        {currentUser ? (
+          <>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar>
+                  <AvatarImage src="/images/placeholder.jpg" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent sideOffset={10}>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <User2Icon className="h-[1.2rem] w-[1.2rem] mr-3" />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Settings className="h-[1.2rem] w-[1.2rem] mr-3" />
+                  Settings
+                </DropdownMenuItem>
+                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Billing</DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => signOut()}
+                  className="text-destructive"
+                >
+                  <LogOut className="h-[1.2rem] w-[1.2rem] mr-3" />
+                  LogOut
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        ) : (
+          <>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <AiOutlineMenu />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent sideOffset={20}>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => signIn()}>
+                  SignIn
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signUp()}>
+                  SignUp
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        )}
       </div>
     </nav>
   );

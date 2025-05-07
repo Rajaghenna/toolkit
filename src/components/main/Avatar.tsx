@@ -1,40 +1,18 @@
-"use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User } from "@prisma/client";
 import React from "react";
+import Image from "next/image";
 
-
-interface AvatarProps {
-  src?: string | null | undefined
-  user: User
-}
-
-const AvatarImg: React.FC<AvatarProps> = ({ src,user}) => {
+const Avatar = () => {
   return (
     <>
-      <Avatar>
-        <AvatarImage src={src || user?.image || "/images/placeholder.jpg"} />
-        <AvatarFallback>CN</AvatarFallback>
-        <span
-          className="
-      absolute
-      block
-      rounded-full
-      bg-green-500
-      ring-2
-      ring-white
-      top-2
-      right-1
-      h-1
-      w-1
-      md:h-2
-      md:w-2
-      "
-        >
-        </span>
-      </Avatar>
+      <Image
+        className="rounded-full hover:bg-orange-500 hover:text-white"
+        src="/images/placeholder.jpg"
+        alt="avatar"
+        width={30}
+        height={30}
+      />
     </>
   );
 };
 
-export default AvatarImg;
+export default Avatar;

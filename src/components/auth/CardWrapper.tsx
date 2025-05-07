@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardFooter } from "../ui/card";
 import Header from "./Header";
 import Social from "./Social";
 import BackButton from "./BackButton";
+import { GiAmericanFootballHelmet } from "react-icons/gi";
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -21,21 +22,26 @@ const CardWrapper = ({
   showSocial,
 }: CardWrapperProps) => {
   return (
-    <Card className="w-[400px] shadow-md">
-      <CardHeader>
-        <Header label={headerLabel} />
-      </CardHeader>
-      <CardContent>{children}</CardContent>
-      {showSocial && (
+    <>
+      <Card className="w-[400px] shadow-md">
+        <GiAmericanFootballHelmet
+          className="flex w-full items-center justify-center mt-6"
+          size={110}
+        />
+        <CardHeader>
+          <Header label={headerLabel} />
+        </CardHeader>
+        <CardContent>{children}</CardContent>
+        {showSocial && (
+          <CardFooter>
+            <Social />
+          </CardFooter>
+        )}
         <CardFooter>
-          <Social />
+          <BackButton label={backButtonLabel} href={backButtonHref} />
         </CardFooter>
-      )}
-      <CardFooter>
-        <BackButton label={backButtonLabel} href={backButtonHref} />
-      </CardFooter>
-    </Card>
+      </Card>
+    </>
   );
 };
-
 export default CardWrapper;

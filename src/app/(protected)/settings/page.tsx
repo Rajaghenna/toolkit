@@ -31,8 +31,6 @@ import {
 } from "@/components/ui/select";
 import { UserRole } from "@prisma/client";
 import { Switch } from "@/components/ui/switch";
-import { FaUserEdit } from "react-icons/fa";
-import { MailIcon } from "lucide-react";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 const SettingsPage = () => {

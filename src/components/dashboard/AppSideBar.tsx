@@ -74,10 +74,10 @@ const AppSideBar = () => {
               <SidebarMenuButton asChild>
                 <Link href="/">
                   <Image
-                    src="/logo/bowler.jpg"
+                    src="/images/bowler.jpg"
                     alt="logo"
-                    width={20}
-                    height={20}
+                    width={35}
+                    height={35}
                   />
                   <span className="text-lg">CricketWon</span>
                 </Link>

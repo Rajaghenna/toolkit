@@ -36,7 +36,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (!userExsits) {
         return "/register";
       }
-      const existingUser = await getUserById(user.id as string);
+      const existingUser = await getUserById(user.id);
       //user is not allowed to sign in with verified email
       if (!existingUser?.emailVerified) {
         return false;

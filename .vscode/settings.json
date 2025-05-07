@@ -3,10 +3,18 @@
   "WillLuke.nextjs.hasPrompted": true,
   "cSpell.words": [
     "actionserver",
+    "Exsits",
     "forgotpassword",
+    "googleusercontent",
+    "pexels",
     "recieve",
     "RECIEVER",
     "Simplelogin",
+    "sonner",
     "veri"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "editor.lineHighlightBorder": "#9fced11f"
+  }
 }
