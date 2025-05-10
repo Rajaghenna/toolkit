@@ -4,6 +4,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Toaster } from "sonner";
 import AuthContext from "./(contextProviders)/AuthContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// import "material-icons/iconfont/material-icons.css";
 
 
 const geistSans = localFont({
@@ -41,6 +44,7 @@ export default function RootLayout({
           >
             <Toaster richColors />
             {children}
+            <ToastContainer position="bottom-right" />
           </ThemeProvider>
         </AuthContext>
       </body>

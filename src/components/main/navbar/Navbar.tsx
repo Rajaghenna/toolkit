@@ -4,8 +4,8 @@ import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
 import Categories from './Categories';
-import { User } from 'next-auth';
 import { SafeUser } from '@/app/types';
+import { User } from '@prisma/client';
 
 interface NavbarProps{
   currentUser?: SafeUser|User|null
@@ -30,7 +30,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           </div>
         </Container>
       </div>
-      <Categories/>
+      <Categories />
     </div>
   );
 }

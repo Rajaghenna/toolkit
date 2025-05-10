@@ -1,8 +1,6 @@
 "use client";
-import React, { useCallback } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avatar";
-import { useState } from "react";
 import MenuItem from "./MenuItem";
 import { User } from "next-auth";
 import { useRouter } from "next/navigation";
@@ -13,22 +11,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, Settings, User2Icon } from "lucide-react";
-import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Home, LogOut, PlusCircleIcon, Receipt, Settings, User2Icon } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
+import { useCallback } from "react";
+import useRentModal from "@/hooks/useRentModal";
+import { BiHomeAlt } from "react-icons/bi";
+import { GiAmericanFootballHelmet } from "react-icons/gi";
+import { RiProfileFill } from "react-icons/ri";
+import { FaTeamspeak } from "react-icons/fa";
 
 interface UserMenuProps {
-  currentUser?: SafeUser |User| null;
+  currentUser?: SafeUser | User | null;
 }
 
 const UserMenu = ({ currentUser }: UserMenuProps) => {
+  const rentModal = useRentModal();
   const router = useRouter();
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const toggleOpen = useCallback(() => {
-  //   setIsOpen((value) => !value);
-  // }, []);
 
   const signUp = () => {
     router.push("/register");
@@ -36,12 +35,19 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const signIn = () => {
     router.push("/signin");
   };
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return router.push("/signin");
+    }
+    //open rentModal
+    rentModal.onOpen();
+  }, [currentUser, router, rentModal]);
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => {}}
+          onClick={onRent}
           className="
           hidden
            md:block
@@ -58,7 +64,6 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           Airbnb Home
         </div>
         <div
-          // onClick={toggleOpen}
           className="
           p-4
           md:py-1
@@ -90,17 +95,31 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent sideOffset={10}>
                     <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={rentModal.onOpen}>
+                      <PlusCircleIcon className="h-[1.2rem] w-[1.2rem] mr-3 cursor-pointer" />
+                      Category
+                    </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <User2Icon className="h-[1.2rem] w-[1.2rem] mr-3" />
+                      <User2Icon className="h-[1.2rem] w-[1.2rem] mr-3 cursor-pointer" />
                       Profile
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Settings className="h-[1.2rem] w-[1.2rem] mr-3" />
+                      <Settings className="h-[1.2rem] w-[1.2rem] mr-3 cursor-pointer" />
                       Settings
                     </DropdownMenuItem>
-                    <DropdownMenuItem>Team</DropdownMenuItem>
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Billing</DropdownMenuItem>
+
+                    <DropdownMenuItem>
+                      <FaTeamspeak className="h-[1.2rem] w-[1.2rem] mr-3 cursor-pointer" />
+                      Team
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <RiProfileFill className="h-[1.2rem] w-[1.2rem] mr-3 cursor-pointer" />
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Receipt className="h-[1.2rem] w-[1.2rem] mr-3 cursor-pointer" />
+                      Billing
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => signOut()}
                       className="text-destructive"
@@ -157,7 +176,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             )}
           </div>
           <div className="hidden md:block">
-            <Avatar />
+            <Avatar src={currentUser?.image} />
           </div>
         </div>
       </div>

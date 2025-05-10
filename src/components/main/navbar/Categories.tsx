@@ -1,14 +1,24 @@
-'use client'
+"use client";
 import React from "react";
-import { TbBeach,TbMountain,TbPool} from "react-icons/tb";
-import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCaveEntrance, GiForestCamp, GiIsland, GiWindmill } from "react-icons/gi";
+import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
+import {
+  GiBarn,
+  GiBoatFishing,
+  GiCactus,
+  GiCastle,
+  GiCaveEntrance,
+  GiForestCamp,
+  GiIsland,
+  GiWindmill,
+} from "react-icons/gi";
 import { MdOutlineVilla } from "react-icons/md";
-import { useSearchParams, usePathname } from "next/navigation";
-import {FaSkiing} from 'react-icons/fa'
-import {BsSnow} from 'react-icons/bs'
-import {IoDiamond} from 'react-icons/io5'
-// import Container from "../main/Container";
-// import CategoryBox from "../main/CategoryBox";
+import { FaSkiing } from "react-icons/fa";
+import { BsSnow } from "react-icons/bs";
+import { IoDiamond } from "react-icons/io5";
+import Container from "../Container";
+import CategoryBox from "../CategoryBox";
+import { usePathname, useSearchParams } from "next/navigation";
+
 
 export const categories = [
   {
@@ -89,13 +99,14 @@ export const categories = [
 ];
 
 function Categories() {
-  const params = useSearchParams();
-  const category = params?.get("category");
-  const pathname = usePathname();
-
-  const isMainPage = pathname === "/listhome";
+  const params = useSearchParams()
+  const category=params.get("category")
+  
+  const pathname = usePathname()
+  const isMainPage = pathname === "/main"
+  
   if (!isMainPage) {
-    return null;
+    return null
   }
   return (
     <Container>
@@ -104,19 +115,19 @@ function Categories() {
         border-t-2
         border-gray-300
         border-b-2
-     pt-4
-     flex
-     flex-row
-     items-center
-     justify-between
-     overflow-x-auto
-    "
-      >
+        flex
+        flex-row
+        items-center
+        justify-between
+        overflow-x-auto
+        pt-4
+        "
+        >
         {categories.map((item) => (
           <CategoryBox
             key={item.label}
             label={item.label}
-            selected={category === item.label}
+            selected={category ===item.label}
             icon={item.icon}
           />
         ))}
@@ -124,5 +135,4 @@ function Categories() {
     </Container>
   );
 }
-
 export default Categories;

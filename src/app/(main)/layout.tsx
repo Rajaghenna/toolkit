@@ -4,6 +4,8 @@ import ClientOnly from "@/components/ClientOnly";
 import ToasterProvider from "../providers/ToasterProvider";
 import RegisterModal from "@/components/modals/RegisterModal";
 import getCurrentUser from "@/actionserver/getCurrentUser";
+import RentModal from "@/components/modals/RentModal";
+
 
 export default async function MainLayout({
   children,
@@ -14,7 +16,8 @@ export default async function MainLayout({
   return (
     <>
       <ClientOnly>
-        <ToasterProvider/>
+        <ToasterProvider />
+        <RentModal/>
         <RegisterModal/>
         <Navbar currentUser={currentUser}/>
       </ClientOnly>

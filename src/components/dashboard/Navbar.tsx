@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { LogOut, Settings, User2Icon } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +17,8 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
+import Avatar from "../main/Avatar";
+
 interface NavbarProps {
   currentUser?: SafeUser|User | null;
 }
@@ -45,8 +47,8 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           <>
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <Avatar>
-                  <AvatarImage src="/images/placeholder.jpg" />
+                <Avatar src={currentUser?.image}>
+                  <AvatarImage />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
