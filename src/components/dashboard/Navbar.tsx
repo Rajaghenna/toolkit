@@ -16,18 +16,18 @@ import { User } from "next-auth";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { SafeUser } from "@/app/types";
-import Avatar from "../main/Avatar";
+import { AdapterUser } from "@/app/types";
+import Avatar from "@/components/main/Avatar"
 
 interface NavbarProps {
-  currentUser?: SafeUser|User | null;
+  currentUser?: AdapterUser|User | null;
 }
 
 const Navbar = ({ currentUser }: NavbarProps) => {
   const router=useRouter()
   // const {toggleSidebar } = useSidebar();
     const signUp = () => {
-      router.push("/register");
+      router.push("/signup");
     };
     const signIn = () => {
       router.push("/signin");
@@ -47,10 +47,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           <>
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <Avatar src={currentUser?.image}>
-                  <AvatarImage />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+              <Avatar src={currentUser?.image}/>
               </DropdownMenuTrigger>
               <DropdownMenuContent sideOffset={10}>
                 <DropdownMenuSeparator />

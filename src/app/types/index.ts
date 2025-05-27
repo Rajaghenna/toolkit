@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 
-export type SafeUser = Omit<
+export type AdapterUser = Omit<
   User,
   "createdAt" | "updatedAt" | "emailVerified"
 > & {

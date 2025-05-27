@@ -12,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { LoginSchema } from "@/schemas";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../main/FormError";
@@ -22,6 +21,8 @@ import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
+import { authLoginSliceSchema } from "@/store/slices/authLoginSliceSchema";
+
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,14 +37,15 @@ const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof authLoginSliceSchema>>({
+    resolver: zodResolver(authLoginSliceSchema),
     defaultValues: {
       email: "",
       password: "",
+      code:"",
     },
   });
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = (values: z.infer<typeof authLoginSliceSchema>) => {
     setError("");
     setSuccess("");
 

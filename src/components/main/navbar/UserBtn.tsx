@@ -29,22 +29,17 @@ const UserBtn = () => {
         </Button>
         <Button
           asChild
-          variant={pathname === "/profile" ? "myColor" : "outline"}
+          variant={pathname === "/dashboard" ? "myColor" : "outline"}
         >
           <Link href="/dashboard">Dashboard</Link>
         </Button>
-        <Button
-          asChild
-          variant={pathname === "/admin" ? "myColor" : "outline"}
-        >
+        <Button asChild variant={pathname === "/admin" ? "myColor" : "outline"}>
           <Link href="/admin">Admin</Link>
         </Button>
-        <Button
-          asChild
-          variant={pathname === "/main" ? "myColor" : "outline"}
-        >
-          <Link href="/main">MainPage</Link>
+        <Button asChild variant={pathname === "/main" ? "myColor" : "outline"}>
+          <Link href="/main">Main</Link>
         </Button>
+
       </div>
     </nav>
   );

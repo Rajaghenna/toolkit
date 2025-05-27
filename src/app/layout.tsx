@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 import AuthContext from "./(contextProviders)/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import "material-icons/iconfont/material-icons.css";
+import "material-icons/iconfont/material-icons.css";
 
 
 const geistSans = localFont({
@@ -21,8 +21,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CricketOn",
-  description: "Momentum is ON",
+  title: "wkt3",
+  description: "Play the Game Man",
 };
 
 export default function RootLayout({

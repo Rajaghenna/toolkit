@@ -1,6 +1,5 @@
 "use server";
 import * as z from "zod";
-import { LoginSchema } from "@/schemas";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
@@ -13,12 +12,13 @@ import {
   sendVerificationEmail,
   sendTwoFactorTokenEmail,
 } from "@/lib/nodemailer";
+import { authLoginSliceSchema } from './../store/slices/authLoginSliceSchema';
 import { db } from "@/lib/db";
 import { getTwoFactorConfirmationByUserId } from "@/data/twoFactorConfirmation";
 import { getTwoFactorTokenByEmail } from "@/data/twoFactorToken";
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
-  const validatedFields = LoginSchema.safeParse(values);
+export const login = async (values: z.infer<typeof authLoginSliceSchema>) => {
+  const validatedFields = authLoginSliceSchema.safeParse(values);
 
   if (!validatedFields.success) {
     return { error: "Invalid Fields" };
@@ -40,7 +40,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     await sendVerificationEmail(
       verificationToken.email,
       verificationToken.token
-    )
+    );
     return { success: "Re-Confirmation Email Sent!!" };
   }
   if (existingUser.isTwoFactorEnabled && existingUser.email) {

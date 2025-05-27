@@ -1,6 +1,6 @@
 "use client";
 import * as z from "zod";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import CardWrapper from "./CardWrapper";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { RegisterSchema } from "@/schemas";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../main/FormError";
@@ -20,24 +19,22 @@ import FormSuccess from "../main/FormSuccess";
 import { register } from "@/actionserver/register";
 import { useTransition } from "react";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
-
+import { authRegisterSliceSchema } from "@/store/slices/authRegisterSliceSchema";
 
 const RegisterForm = () => {
-
   const [showPassword, setShowPassword] = useState(false);
-
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof authRegisterSliceSchema>>({
+    resolver: zodResolver(authRegisterSliceSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
     },
   });
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof authRegisterSliceSchema>) => {
     setError("");
     setSuccess("");
     startTransition(() => {

@@ -11,18 +11,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Home, LogOut, PlusCircleIcon, Receipt, Settings, User2Icon } from "lucide-react";
+import {  LogOut, PlusCircleIcon, Receipt, Settings, User2Icon } from "lucide-react";
 import { signOut } from "next-auth/react";
-import { SafeUser } from "@/app/types";
 import { useCallback } from "react";
 import useRentModal from "@/hooks/useRentModal";
-import { BiHomeAlt } from "react-icons/bi";
-import { GiAmericanFootballHelmet } from "react-icons/gi";
 import { RiProfileFill } from "react-icons/ri";
 import { FaTeamspeak } from "react-icons/fa";
+import { AdapterUser } from "@/app/types";
 
 interface UserMenuProps {
-  currentUser?: SafeUser | User | null;
+  currentUser?: |AdapterUser|User | null;
 }
 
 const UserMenu = ({ currentUser }: UserMenuProps) => {

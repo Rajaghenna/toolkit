@@ -2,7 +2,7 @@
  * An array of routes that are accessible to the public openly without any restrictions
  * @type{string[]}
  */
-export const publicRoutes = ["/", "/newVerification", "/main"];
+export const publicRoutes = ["/", "/newVerification"];
 /**
  * an array of routes used for authentication
  * these routes will redirect logged in users to /settings
@@ -14,7 +14,6 @@ export const authRoutes = [
   "/error",
   "/forgotpassword",
   "/newPassword",
-  "/dashboard",
 ];
 
 /**
