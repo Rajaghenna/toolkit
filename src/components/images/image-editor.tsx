@@ -212,7 +212,7 @@ export default function ImageEditor({ imageUrl }) {
           <canvas ref={canvasRef} className="h-auto max-w-full" />
         </div>
         <div className="mt-2 flex justify-between">
-          <div className="text-gray-500 text-xs">WebGL Editor</div>
+          <div className="text-gray-500 text-xs">wkt3 Editor</div>
           <Button variant="outline" size="sm" onClick={handleSaveImage}>
             Save Image
           </Button>

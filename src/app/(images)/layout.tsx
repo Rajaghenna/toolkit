@@ -6,7 +6,7 @@ import ClientOnly from "@/components/ClientOnly";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "CricketON Editor",
+  title: "wkt3 Editor",
   description: "Editor u loves",
 };
 
@@ -24,8 +24,12 @@ export default function ImageLayout({
         />
       </head>
       <ClientOnly>
-      <body className={inter.className}>{children}</body>
+        <section className={inter.className}>
+          <div className="flex flex-col min-h-screen">
+            <main className="flex-1">{children}</main>
+          </div>
+        </section>
       </ClientOnly>
-      </>
+    </>
   );
 }

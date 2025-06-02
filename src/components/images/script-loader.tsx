@@ -1,52 +1,68 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useGlfx } from '@/lib/use-glfx';
+import { useEffect, useState } from "react";
+import { useGlfx } from "@/lib/use-glfx";
 
-export default function ScriptLoader({ children, fallback }) {
-	const glfxStatus = useGlfx();
-	const [html2canvasLoaded, setHtml2canvasLoaded] = useState(false);
+import { ReactNode } from "react";
 
-	useEffect(() => {
-		// Check if html2canvas is already loaded
-		if (typeof window !== 'undefined' && window.html2canvas) {
-			setHtml2canvasLoaded(true);
-			return;
-		}
+declare global {
+  interface Window {
+    html2canvas?: any;
+  }
+}
 
-		// Create script element to load html2canvas
-		const script = document.createElement('script');
-		script.src = '/html2canvas.min.js';
-		script.async = true;
-		script.onload = () => setHtml2canvasLoaded(true);
-		document.body.appendChild(script);
+type ScriptLoaderProps = {
+  children: ReactNode;
+  fallback?: ReactNode;
+};
 
-		return () => {
-			if (script.parentNode) {
-				script.parentNode.removeChild(script);
-			}
-		};
-	}, []);
+export default function ScriptLoader({
+  children,
+  fallback,
+}: ScriptLoaderProps) {
+  const glfxStatus = useGlfx();
+  const [html2canvasLoaded, setHtml2canvasLoaded] = useState(false);
 
-	if (glfxStatus === 'error') {
-		return fallback ? (
-			fallback
-		) : (
-			<div className='p-4 text-center'>
-				<p className='text-red-500'>
-					Failed to load WebGL editor. Please try the Standard Editor instead.
-				</p>
-			</div>
-		);
-	}
+  useEffect(() => {
+    // Check if html2canvas is already loaded
+    if (typeof window !== "undefined" && window.html2canvas) {
+      setHtml2canvasLoaded(true);
+      return;
+    }
 
-	if (glfxStatus === 'loading' || !html2canvasLoaded) {
-		return (
-			<div className='p-4 text-center'>
-				<p>Loading WebGL editor...</p>
-			</div>
-		);
-	}
+    // Create script element to load html2canvas
+    const script = document.createElement("script");
+    script.src = "/html2canvas.min.js";
+    script.async = true;
+    script.onload = () => setHtml2canvasLoaded(true);
+    document.body.appendChild(script);
 
-	return <>{children}</>;
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
+
+  if (glfxStatus === "error") {
+    return fallback ? (
+      fallback
+    ) : (
+      <div className="p-4 text-center">
+        <p className="text-red-500">
+          Failed to load WebGL editor. Please try the Standard Editor instead.
+        </p>
+      </div>
+    );
+  }
+
+  if (glfxStatus === "loading" || !html2canvasLoaded) {
+    return (
+      <div className="p-4 text-center">
+        <p>Loading wkt3 editor...</p>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
 }
