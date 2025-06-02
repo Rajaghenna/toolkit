@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 
 declare global {
   interface Window {
-    html2canvas?: any;
+    html2canvas?: ((...args: unknown[]) => unknown) | undefined;
   }
 }
 
@@ -50,7 +50,7 @@ export default function ScriptLoader({
     ) : (
       <div className="p-4 text-center">
         <p className="text-red-500">
-          Failed to load WebGL editor. Please try the Standard Editor instead.
+          Failed to load wkt3 editor. Please try the Standard Editor instead.
         </p>
       </div>
     );

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { useGlfx } from "@/lib/use-glfx";
+import html2canvas from "html2canvas";
 
 // Simplified filter types
 type FilterType =
@@ -63,15 +64,18 @@ const filterConfigs = {
   },
 };
 
-export default function ImageEditor({ imageUrl }) {
+interface ImageEditorProps {
+  imageUrl: string;
+}
+
+export default function ImageEditor({ imageUrl }: ImageEditorProps) {
   const [selectedFilter, setSelectedFilter] =
     useState<FilterType>("brightness");
-  const [filterParams, setFilterParams] = useState<any>({});
-  const [texture, setTexture] = useState<any>(null);
-  const [canvas, setCanvas] = useState<any>(null);
-  const [originalImage, setOriginalImage] = useState<HTMLImageElement | null>(
-    null
-  );
+  const [filterParams, setFilterParams] = useState<Record<string, number>>({});
+  const [texture, setTexture] = useState<
+    null | (typeof window extends { fx: { Texture: infer T } } ? T : unknown)
+  >(null);
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -97,11 +101,10 @@ export default function ImageEditor({ imageUrl }) {
     img.crossOrigin = "anonymous";
 
     img.onload = () => {
-      setOriginalImage(img);
-
-      if (!window.fx) return;
+      // setOriginalImage(img); // Remove or comment out if not defined elsewhere
 
       try {
+        if (!window.fx) return;
         const glfxCanvas = window.fx.canvas();
         const glfxTexture = glfxCanvas.texture(img);
 
@@ -118,7 +121,7 @@ export default function ImageEditor({ imageUrl }) {
             glfxCanvas,
             canvasRef.current
           );
-          canvasRef.current = glfxCanvas;
+          // Do not assign to canvasRef.current as it is read-only
         }
 
         glfxCanvas.draw(glfxTexture).update();
@@ -183,14 +186,18 @@ export default function ImageEditor({ imageUrl }) {
 
     try {
       // Use html2canvas to capture what's visible on screen
-      const screenshotCanvas = await html2canvas(
-        editorRef.current.querySelector(".canvas-container"),
-        {
-          useCORS: true,
-          backgroundColor: null,
-          scale: 2, // Higher quality
-        }
-      );
+      const canvasContainer = editorRef.current.querySelector(
+        ".canvas-container"
+      ) as HTMLElement | null;
+      if (!canvasContainer) {
+        alert("Could not find canvas container.");
+        return;
+      }
+      const screenshotCanvas = await html2canvas(canvasContainer, {
+        useCORS: true,
+        backgroundColor: null,
+        scale: 2, // Higher quality
+      });
 
       // Create download link
       const link = document.createElement("a");
