@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { useGlfx } from "@/lib/use-glfx";
-import html2canvas from "html2canvas";
 
 // Simplified filter types
 type FilterType =
@@ -64,18 +63,15 @@ const filterConfigs = {
   },
 };
 
-interface ImageEditorProps {
-  imageUrl: string;
-}
-
-export default function ImageEditor({ imageUrl }: ImageEditorProps) {
+export default function ImageEditor({ imageUrl }) {
   const [selectedFilter, setSelectedFilter] =
     useState<FilterType>("brightness");
-  const [filterParams, setFilterParams] = useState<Record<string, number>>({});
-  const [texture, setTexture] = useState<
-    null | (typeof window extends { fx: { Texture: infer T } } ? T : unknown)
-  >(null);
-  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+  const [filterParams, setFilterParams] = useState<any>({});
+  const [texture, setTexture] = useState<any>(null);
+  const [canvas, setCanvas] = useState<any>(null);
+  const [originalImage, setOriginalImage] = useState<HTMLImageElement | null>(
+    null
+  );
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -101,10 +97,11 @@ export default function ImageEditor({ imageUrl }: ImageEditorProps) {
     img.crossOrigin = "anonymous";
 
     img.onload = () => {
-      // setOriginalImage(img); // Remove or comment out if not defined elsewhere
+      setOriginalImage(img);
+
+      if (!window.fx) return;
 
       try {
-        if (!window.fx) return;
         const glfxCanvas = window.fx.canvas();
         const glfxTexture = glfxCanvas.texture(img);
 
@@ -121,7 +118,7 @@ export default function ImageEditor({ imageUrl }: ImageEditorProps) {
             glfxCanvas,
             canvasRef.current
           );
-          // Do not assign to canvasRef.current as it is read-only
+          canvasRef.current = glfxCanvas;
         }
 
         glfxCanvas.draw(glfxTexture).update();
@@ -186,11 +183,10 @@ export default function ImageEditor({ imageUrl }: ImageEditorProps) {
 
     try {
       // Use html2canvas to capture what's visible on screen
-      const canvasContainer = editorRef.current.querySelector(
-        ".canvas-container"
-      ) as HTMLElement | null;
+      const canvasContainer =
+        editorRef.current.querySelector(".canvas-container");
       if (!canvasContainer) {
-        alert("Could not find canvas container.");
+        alert("Canvas container not found.");
         return;
       }
       const screenshotCanvas = await html2canvas(canvasContainer, {
@@ -219,7 +215,7 @@ export default function ImageEditor({ imageUrl }: ImageEditorProps) {
           <canvas ref={canvasRef} className="h-auto max-w-full" />
         </div>
         <div className="mt-2 flex justify-between">
-          <div className="text-gray-500 text-xs">wkt3 Editor</div>
+          <div className="text-gray-500 text-xs">WebGL Editor</div>
           <Button variant="outline" size="sm" onClick={handleSaveImage}>
             Save Image
           </Button>
