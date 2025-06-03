@@ -31,9 +31,10 @@ import {
 } from "@/components/ui/select";
 import { UserRole } from "@prisma/client";
 import { Switch } from "@/components/ui/switch";
-import { FaUserEdit } from "react-icons/fa";
-import { MailIcon } from "lucide-react";
-import { PasswordInput } from "@/components/ui/password-input";
+// import { FaUserEdit } from "react-icons/fa";
+// import { MailIcon } from "lucide-react";
+// import { PasswordInput } from "@/components/ui/password-input";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 const SettingsPage = () => {
   const [showPassword, setShowPassword] = useState(false);
