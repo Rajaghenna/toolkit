@@ -34,6 +34,7 @@ import { Switch } from "@/components/ui/switch";
 import { FaUserEdit } from "react-icons/fa";
 import { MailIcon } from "lucide-react";
 import { PasswordInput } from "@/components/ui/password-input";
+import SignOut from "@/components/auth/SignOut";
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -221,9 +222,18 @@ const SettingsPage = () => {
               </div>
               <FormError message={error} />
               <FormSuccess message={success} />
-              <Button disabled={isPending} type="submit">
-                Save
-              </Button>
+              <div className="flex flex-row items-center justify-center w-full gap-9">
+                <Button disabled={isPending} type="submit">
+                  Save
+                </Button>
+                {/* here both logouts are working proper */}
+                <Button onClick={() => signOut()} type="submit">
+                  signOut
+                </Button>
+                <SignOut>
+                  <Button type="button">LogOut</Button>
+                </SignOut>
+              </div>
             </form>
           </Form>
         </CardContent>
