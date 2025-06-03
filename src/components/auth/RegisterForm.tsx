@@ -12,30 +12,29 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { RegisterSchema } from "@/schemas";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../main/FormError";
 import FormSuccess from "../main/FormSuccess";
 import { register } from "@/actionserver/register";
 import { useTransition } from "react";
-import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
-import { MailIcon } from "lucide-react";
-import { PasswordInput } from "../ui/password-input";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
+import { authRegisterSliceSchema } from "@/store/slices/authRegisterSliceSchema";
 
 const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof authRegisterSliceSchema>>({
+    resolver: zodResolver(authRegisterSliceSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
     },
   });
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof authRegisterSliceSchema>) => {
     setError("");
     setSuccess("");
     startTransition(() => {
@@ -66,9 +65,6 @@ const RegisterForm = () => {
                       {...field}
                       disabled={isPending}
                       placeholder="john-doe"
-                      suffix={
-                        <MdOutlineDriveFileRenameOutline className="-ml-10" />
-                      }
                     />
                   </FormControl>
                   <FormMessage />
@@ -87,7 +83,6 @@ const RegisterForm = () => {
                       disabled={isPending}
                       placeholder="johndoe@gmail.com"
                       type="email"
-                      suffix={<MailIcon className="-ml-10" />}
                     />
                   </FormControl>
                   <FormMessage />
@@ -102,12 +97,22 @@ const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <PasswordInput
-                      {...field}
-                      // disabled={isPending}
-                      placeholder="******"
-                      disabled={isPending}
-                    />
+                    <div className="flex items-center border rounded px-3 py-2">
+                      <Input
+                        {...field}
+                        placeholder="******"
+                        disabled={isPending}
+                        type={showPassword ? "text" : "password"}
+                        className="flex-grow outline-none"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="ml-2 text-gray-600"
+                      >
+                        {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -12,7 +12,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
   if (!validatedFields.success) {
     return { error: "Invalid Email" };
   }
-  // destructure data from validatedfields
+  // destructure data from validated fields
   const { email } = validatedFields.data;
   const existingUser = await getUserByEmail(email);
 
@@ -22,7 +22,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   //TODO:GENERATE TOKEN and send email
   const passwordResetToken = await generatePasswordResetToken(email);
-  //note parameters shoulds always bs first pReToken(email) and after pReToken(token)
+  //note parameters should always bs first pReToken(email) and after pReToken(token)
   await sendPasswordResetEmail(
     passwordResetToken.email,
     passwordResetToken.token

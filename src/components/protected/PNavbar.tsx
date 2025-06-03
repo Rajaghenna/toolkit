@@ -1,5 +1,9 @@
-import React from 'react'
-import UserBtn from '../navbar/UserBtn';
+"use client"
+import React from "react";
+import { Button } from "../ui/button";
+import UserBtn from "../main/navbar/UserBtn";
+import { signOut } from "next-auth/react";
+
 
 const PNavbar = () => {
   return (
@@ -9,10 +13,15 @@ const PNavbar = () => {
         py-4
       "
       >
-        <UserBtn/>
+        <UserBtn />
       </div>
+      <div className="float-right">
+        <Button onClick={()=>signOut()} >
+          SignOut
+        </Button>
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default PNavbar
+export default PNavbar;

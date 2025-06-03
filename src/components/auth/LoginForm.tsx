@@ -12,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { LoginSchema } from "@/schemas";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import FormError from "../main/FormError";
@@ -21,10 +20,12 @@ import { login } from "@/actionserver/login";
 import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { MailIcon } from "lucide-react";
-import { PasswordInput } from "../ui/password-input";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
+import { authLoginSliceSchema } from "@/store/slices/authLoginSliceSchema";
+
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   //this is for 2fa
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   //this is the error callback url from browser bar
@@ -36,14 +37,15 @@ const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof authLoginSliceSchema>>({
+    resolver: zodResolver(authLoginSliceSchema),
     defaultValues: {
       email: "",
       password: "",
+      code:"",
     },
   });
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = (values: z.infer<typeof authLoginSliceSchema>) => {
     setError("");
     setSuccess("");
 
@@ -112,7 +114,6 @@ const LoginForm = () => {
                           disabled={isPending}
                           placeholder="johndoe@gmail.com"
                           type="email"
-                          suffix={<MailIcon className="-ml-10"/>}
                         />
                       </FormControl>
                       <FormMessage />
@@ -126,11 +127,22 @@ const LoginForm = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <PasswordInput
-                          {...field}
-                          placeholder="******"
-                          disabled={isPending}
-                        />
+                        <div className="flex items-center border rounded px-3 py-2">
+                          <Input
+                            {...field}
+                            placeholder="******"
+                            disabled={isPending}
+                            type={showPassword ? "text" : "password"}
+                            className="flex-grow outline-none"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="ml-2 text-gray-600"
+                          >
+                            {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+                          </button>
+                        </div>
                       </FormControl>
                       <Button
                         className="px-0 font-normal"

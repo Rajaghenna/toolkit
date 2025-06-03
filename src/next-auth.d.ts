@@ -20,3 +20,5 @@ declare module "next-auth" {
 }
 
 //add fields here to fetch on server frontend ui
+
+

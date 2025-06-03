@@ -11,7 +11,6 @@ import { NextResponse } from "next/server";
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
-  //req.auth change string into boolean using !! .
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
